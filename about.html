@@ -6,23 +6,156 @@
     <title>Richard Baltazar Website</title>
     <link href="images/favicon.svg" rel="icon">
     <style>
-        footer {border: 2px solid}
+        body{
+            background-color: black;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, p, li, ul, article p, fun-facts p, b{
+            color: white;
+        }
+
+        footer{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 2em 0;
+            gap: 1em;
+        }
+
+        footer p{
+            color: white;
+            margin: 1em 0 0 0;
+        }
+
+        a{
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover{
+            text-decoration: underline;
+        }
+
+        footer ul{
+            display: flex;
+            list-style: none;
+            gap: 2em;
+            margin: 0;
+            padding: 0;
+        }
+
+        hr{
+            width: 100%;
+            border: 1px solid #F4B400;
+        }
+
+        img{
+            height: 10em;
+            width: 10em;
+        }
+        
+        h2, fun-facts h3, h3{
+            display: flex;
+            justify-content: center;
+        }
+
+        h2{
+            font-size: 3em;
+        }
+
+        h3{
+            font-size: 2em;
+        }
+
+        section ul{
+            list-style: none;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        ol p, ul p{
+            text-align: center;
+        }        
+
+        article p{
+            max-width: 50rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section ol{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        iframe{
+            width: 80%;
+            height: 50rem;
+            border: none;
+            margin: auto;
+            display: block;
+            padding-bottom: 2em;
+        }
+
+        fun-facts{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+        fun-facts b {
+            display: block;
+            margin-bottom: 0.5em;
+            font-size: 1.2em;
+        }
+
+        fun-facts ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        fun-facts ul li {
+            padding: 0.2em 0;
+        }
+
+        ul, ol{
+            padding: 0;
+        }
+
+        .pagebreak {
+            display: flex;
+            align-items: center;
+            width: 50%;
+        }
+
     </style>
 </head>
 
 <body>
+     <h1><a href="index.html">Richard Baltazar</a></h1>
+     
+     <hr>
+
     <header>
-        <h1>About</h1>
+        <h2>About</h2>
     </header>
 
   <main>
     <section>
-        <h2>Academic Background</h2>
+        <h3>Academic Background</h3>
         <ul>
-            <li>High School:</li>
+            <li>High School</li>
             <img src="images/ehs_logo.png" alt="ehs_logo">
             <p><b><span>Escondido</span> High School</b> <br> Year: 2018 - 2022</p>
-            <li>College:</li>
+            <li>College</li>
             <img src="images/ucsd_logo.png" alt="ucsd_logo">
             <p><b>University of California, <span>San Diego</span></b> <br> Year: 2022 - 2026 <br> Major: <strong>Computer Science</strong></p>
         </ul>
@@ -36,18 +169,15 @@
         <p>I love the NBA. I'm a big fan of basketball, and even when I was younger, I would spend time analyzing data and statistics of NBA players. I found that intriguing and fun. As I got older, I realized that I could turn that hobby into a career, and so I am choosing to pursue a career in Data Analystics.</p>
     </article>
 
+    <hr class="pagebreak">
+    
     <section>
-        <p>How much do I want to be a Data Analyst??</p>
-        <progress id="progress" value="100" max="100">100%</progress>
-    </section>
-
-    <section>
-        <h2>Experiences</h2>
+        <h3>Experiences</h3>
          <ol>
             <li><b>San Diego Supercomputer Center</b></li>
             <p>Position: Business Development Analyst Intern <br> <em>September 2025 - Present</em></p>
             <p>Position: Software Engineer Intern <br> <em>June 2025 - September 2025</em> </p>
-            <li><b>Kaibigan Pilipino at UCSD</b></li>
+            <li><b>Kaibigang Pilipino at UCSD</b></li>
             <p>Position: Software Engineer Volunteer <br> <em>June 2024 - January 2025</em></p>
             <p>Position: Talent Show Committee <br> <em>October 2022 - April 2023</em></p>
             <li><b>Silvergate San Marcos</b></li>
@@ -60,6 +190,8 @@
         <iframe src="images/resume.pdf" title="Resume"></iframe>
     </section>
     
+    <hr class="pagebreak">
+
     <fun-facts>
         <h3>Fun facts about me</h3>
         <b>I enjoy</b>
@@ -89,38 +221,17 @@
     </fun-facts>
   </main>
 
+  <hr>
   <footer>
-    <p>&copy; 2025 Richard Baltazar</p>
-        <nav>
-            <ul>
-                <li><a>Home</a></li>
-                <li><a>About</a></li>
-                <li><a>Skills</a></li>
-                <li><a>Contact</a></li>
-            </ul>
-        </nav>
-
-    <svg width="40" height="40" viewBox="0 0 100 100">
-        <circle 
-          cx="50" 
-          cy="50" 
-          r="48" 
-          fill="black" 
-          stroke="white" 
-          stroke-width="2"
-        />
-        <text 
-          x="50" 
-          y="60" 
-          text-anchor="middle" 
-          font-size="28" 
-          fill="white" 
-          font-family="Arial, sans-serif"
-        >
-          RB
-        </text>
-      </svg>
-
+    <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skill.html">Skills</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <p>&copy; 2025 Richard Baltazar</p>  
   </footer>
 </body>
 </html>
