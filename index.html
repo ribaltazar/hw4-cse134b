@@ -10,19 +10,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Maitree:wght@200;300;400;500;600;700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
   <style>
     :root{
-      --brand: #F4B400
+      --brand: #F4B400;
+      --bg: #000000;
+      --fg: #ffffff;
+    }
+
+    :root[data-theme="light"] {
+      --bg: #f5f5f5;
+      --fg: #111111;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #000000;
+      --fg: #ffffff;
     }
     
     html,body{
       overflow-x: hidden;
+      background-color: var(--bg);
+      color: var(--fg);
     }
     
     body{
-      background-color: black;
+      background-color: var(--bg);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       min-height: 100dvh;
+      margin: 0;
     }
     
     header{
@@ -66,9 +81,9 @@
       text-align: center;
       font-family: 'Nunito', sans-serif;
       margin-top: 0.5em;
-      &:hover{
-        text-shadow: 0 0 10px var(--brand, #F4B400),0 0 20px var(--brand, #F4B400),0 0 30px var(--brand, #F4B400);
-      }
+        &:hover{
+          text-shadow: 0 0 10px var(--brand, #F4B400),0 0 20px var(--brand, #F4B400),0 0 30px var(--brand, #F4B400);
+        }
     }
     
     hr{
@@ -87,7 +102,7 @@
           padding: 4em;
         }
         a{
-          color: white;
+          color: var(--fg);
           text-decoration: none;
           font-size: 4em;
           font-family: 'Maitree', serif;
@@ -96,20 +111,20 @@
     }
     
     h1,h2,h3,p,li ul{
-      color: white;
+      color: var(--fg);
     }
     
     footer{
       width: 100%;
       p{
         text-align: right;
-        color: white;
+        color: var(--fg);
         padding-top: 1em;
       }
     }
     
     a{
-      color: white;
+      color: var(--fg);
       text-decoration: none;
       &:hover{
         color: var(--brand, #F4B400);
@@ -126,9 +141,10 @@
         border: 2px solid var(--brand, #F4B400);
         box-shadow: 0 0 20px rgba(244,180,0,0.6);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+         
         &:hover{
-          transform: scale(1.05);
-          box-shadow: 0 0 30px rgba(244,180,0,0.9);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(244,180,0,0.9);
         }
       }
     }
@@ -137,6 +153,32 @@
       display: none;
       cursor: pointer;
       font-size: 1.5rem;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--brand);
+      background-color: var(--brand);
+      color: #000;
+      cursor: pointer;
+    }
+
+    .theme-toggle {
+      display: none;
+    }
+
+    .js-enabled .theme-toggle {
+      display: inline-block;
+    }
+
+    ::view-transition-old(root), ::view-transition-new(root) {
+      animation-duration: 350ms;
+      animation-timing-function: ease-in-out;
     }
     
     @media (max-width: 600px){
@@ -238,8 +280,6 @@
     }
   </style>
 </head>
-
-<body>
   <script>
     class HelloWorldElement extends HTMLElement {
       connectedCallback() {
@@ -247,8 +287,48 @@
       }
     }
     customElements.define('hello-world', HelloWorldElement);
-  </script>
 
+    // theme toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      document.documentElement.classList.add('js-enabled');
+
+      const THEME_KEY = 'site-theme';
+      const root = document.documentElement;
+
+      //initial theme
+      const savedTheme = localStorage.getItem(THEME_KEY);
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        root.dataset.theme = savedTheme;
+      } else {
+        root.dataset.theme = 'dark';
+      }
+
+      const toggleBtn = document.getElementById('theme-toggle');
+      if (!toggleBtn) return;
+
+      function setTheme(next) {
+        root.dataset.theme = next;
+        localStorage.setItem(THEME_KEY, next);
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        const current = root.dataset.theme === 'light' ? 'light' : 'dark';
+        const next = current === 'light' ? 'dark' : 'light';
+
+        const doSwitch = () => setTheme(next);
+
+        //view transition api
+        if (!document.startViewTransition) {
+          doSwitch();
+        } else {
+          document.startViewTransition(doSwitch);
+        }
+      });
+    });
+  </script>
+<body>
+  <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"> 🌙 / ☀️ </button>
+  
   <hello-world></hello-world>
   <h1><a href="index.html">Richard Baltazar</a></h1>
 
